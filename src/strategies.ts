@@ -4,8 +4,8 @@ import {
   BaseMetricsStrategy,
   GenerationMetricsMatrix,
   GenomeMetricsRow,
-  MultiprocessingMetricsStrategyConfig,
 } from "genetic-search";
+import { MultiprocessingMetricsStrategyConfig } from "./types";
 
 export abstract class BaseMultiprocessingMetricsStrategy<
   TGenome extends BaseGenome,

@@ -4,12 +4,12 @@ import {
   FitnessStrategyInterface,
   GenerationFitnessColumn,
   GenerationMetricsMatrix,
-  MultiprocessingMetricsStrategyConfig,
   MutationStrategyInterface,
   PopulateStrategyInterface,
   Population,
   IdGeneratorInterface,
 } from "genetic-search";
+import type { MultiprocessingMetricsStrategyConfig } from "../../src";
 import { BaseMultiprocessingMetricsStrategy } from "../../src";
 
 export type TravelingGenome = BaseGenome & {

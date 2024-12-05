@@ -5,11 +5,11 @@ import {
   GenerationFitnessColumn,
   PopulateStrategyInterface,
   FitnessStrategyInterface,
-  MultiprocessingMetricsStrategyConfig,
   BaseMutationStrategy,
   BaseMutationStrategyConfig,
   IdGeneratorInterface,
 } from "genetic-search";
+import type { MultiprocessingMetricsStrategyConfig } from "../../src";
 import { BaseMultiprocessingMetricsStrategy } from "../../src";
 
 export type ParabolaArgumentGenome = BaseGenome & {
