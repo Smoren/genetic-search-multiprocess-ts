@@ -1,0 +1,65 @@
+{
+  "name": "genetic-search-multiprocess",
+  "version": "1.0.0",
+  "description": "Multiprocessing genetic algorithm implementation library extension",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Smoren/genetic-search-multiprocessing-ts.git"
+  },
+  "author": {
+    "name": "Smoren",
+    "email": "ofigate@gmail.com",
+    "url": "https://github.com/Smoren"
+  },
+  "homepage": "https://github.com/Smoren/genetic-search-multiprocessing-ts#readme",
+  "bugs": {
+    "url": "https://github.com/Smoren/genetic-search-multiprocessing-ts/issues"
+  },
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "scripts": {
+    "build": "npm run build:commonjs && npm run build:es",
+    "build:commonjs": "rimraf lib && tsc --downlevelIteration --target es5 --outDir lib --module commonjs --declaration",
+    "build:es": "rimraf es && tsc --target es6 --outDir es --module es6",
+    "test": "jest --coverage",
+    "jest": "jest",
+    "format": "ts-scripts format",
+    "lint": "ts-scripts lint",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "es",
+    "lib",
+    "src",
+    "tests"
+  ],
+  "keywords": [
+    "genetic algorithm",
+    "genetic-algorithm",
+    "algorithm",
+    "evolutionary-programming",
+    "genetic",
+    "heuristic",
+    "heuristic-search",
+    "search-algorithm",
+    "machine-learning",
+    "multiprocessing"
+  ],
+  "dependencies": {
+    "genetic-search": "^5.5.5",
+    "multiprocess-pool": "^1.4"
+  },
+  "devDependencies": {
+    "@borderless/ts-scripts": "^0.13.6",
+    "@types/jest": "^29.2.4",
+    "jest": "^29.3.1",
+    "rimraf": "^4.4.0",
+    "ts-expect": "^1.1.0",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.9.4"
+  },
+  "types": "./lib/index.d.ts",
+  "jsnext:main": "./es/index.js",
+  "sideEffects": false
+}
