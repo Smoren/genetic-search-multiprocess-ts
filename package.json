@@ -1,6 +1,6 @@
 {
   "name": "genetic-search-multiprocess",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Multiprocessing genetic algorithm implementation library extension",
   "license": "MIT",
   "repository": {
@@ -47,7 +47,7 @@
     "multiprocessing"
   ],
   "dependencies": {
-    "genetic-search": "^6.0.1",
+    "genetic-search": "^6.1.0",
     "multiprocess-pool": "^1.4"
   },
   "devDependencies": {
