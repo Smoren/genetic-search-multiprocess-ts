@@ -15,7 +15,7 @@ export abstract class BaseMultiprocessingMetricsStrategy<
   protected async execTasks(inputs: TTaskConfig[]): Promise<GenerationMetricsMatrix> {
     const pool = new Pool(this.config.poolSize);
     const result: GenerationMetricsMatrix = await pool.map(inputs, this.config.task, {
-      onResult: (result: any) => this.config.onTaskResult?.(result as GenomeMetricsRow),
+      onResult: (result: any, index: number) => this.config.onTaskResult?.(result as GenomeMetricsRow, inputs[index]),
     });
     pool.close();
 
