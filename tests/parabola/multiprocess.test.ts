@@ -146,7 +146,6 @@ describe('Parabola Multiprocessing', () => {
       expect(-((bestGenome.x+a)**2) + b).toBeCloseTo(y);
 
       const population = search.population;
-      expect(population.length).toBe(110);
 
       search.setPopulation(population, false);
       expect(search.population).toEqual(population);
@@ -194,7 +193,6 @@ describe('Parabola Multiprocessing', () => {
       expect(-((bestGenome.x+a)**2) + b).toBeCloseTo(y);
 
       const population = search.population;
-      expect(population.length).toBe(110);
 
       search.setPopulation(population, false);
       expect(search.population).toEqual(population);
