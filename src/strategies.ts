@@ -1,4 +1,4 @@
-import { Pool } from 'multiprocess-pool';
+import { Pool } from 'multiprocessor';
 import {
   BaseGenome,
   BaseMetricsStrategy,
@@ -27,9 +27,11 @@ export abstract class BaseMultiprocessingMetricsStrategy<
    */
   protected async execTasks(inputs: TTaskConfig[]): Promise<GenerationMetricsMatrix> {
     const pool = new Pool(this.config.poolSize);
-    const result: GenerationMetricsMatrix = await pool.map(inputs, this.config.task, {
-      onResult: (result: any, index: number) => this.config.onTaskResult?.(result as GenomeMetricsRow, inputs[index]),
-    });
+    const result = await pool.map(
+      inputs,
+      this.config.task,
+      (result, input) => this.config.onTaskResult?.(result as GenomeMetricsRow, input),
+    ) as GenerationMetricsMatrix;
     pool.close();
 
     return result;
