@@ -1,6 +1,6 @@
 {
   "name": "genetic-search-multiprocess",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Multiprocessing genetic algorithm implementation library extension",
   "license": "MIT",
   "repository": {
@@ -48,7 +48,7 @@
   ],
   "dependencies": {
     "genetic-search": "^7.1.1",
-    "multiprocessor": "^0.4.1"
+    "multiprocessor": "^1.0.0"
   },
   "devDependencies": {
     "@borderless/ts-scripts": "^0.13.6",
