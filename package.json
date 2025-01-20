@@ -48,7 +48,7 @@
     "multiprocessing"
   ],
   "dependencies": {
-    "genetic-search": "^9.0.1",
+    "genetic-search": "^9.0.2",
     "multiprocessor": "^1.0.2"
   },
   "devDependencies": {
