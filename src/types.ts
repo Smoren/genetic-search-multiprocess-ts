@@ -1,12 +1,12 @@
-import type { MetricsStrategyConfig } from "genetic-search";
+import type { PhenotypeStrategyConfig } from "genetic-search";
 
 /**
- * Configuration for the Multiprocessing Metrics Strategy.
+ * Configuration for the Multiprocessing Phenotype Strategy.
  *
- * @template TTaskConfig The type of metrics task calculation configuration.
+ * @template TTaskConfig The type of phenotype task calculation configuration.
  *
  * @property {number} poolSize The size of the multiprocessing pool.
  */
-export type MultiprocessingMetricsStrategyConfig<TTaskConfig> = MetricsStrategyConfig<TTaskConfig> & {
+export type MultiprocessingPhenotypeStrategyConfig<TTaskConfig> = PhenotypeStrategyConfig<TTaskConfig> & {
   poolSize: number;
 };

@@ -3,14 +3,14 @@ import {
   CrossoverStrategyInterface,
   FitnessStrategyInterface,
   GenerationFitnessColumn,
-  GenerationMetricsMatrix,
+  GenerationPhenotypeMatrix,
   MutationStrategyInterface,
   PopulateStrategyInterface,
   Population,
   IdGeneratorInterface,
 } from "genetic-search";
-import type { MultiprocessingMetricsStrategyConfig } from "../../src";
-import { BaseMultiprocessingMetricsStrategy } from "../../src";
+import type { MultiprocessingPhenotypeStrategyConfig } from "../../src";
+import { BaseMultiprocessingPhenotypeStrategy } from "../../src";
 
 export type TravelingGenome = BaseGenome & {
   id: number;
@@ -19,7 +19,7 @@ export type TravelingGenome = BaseGenome & {
 
 export type TravelingTaskConfig = [number[], number[][]];
 
-export type TravelingMultiprocessingMetricsStrategyConfig = MultiprocessingMetricsStrategyConfig<TravelingTaskConfig> & {
+export type TravelingMultiprocessingPhenotypeStrategyConfig = MultiprocessingPhenotypeStrategyConfig<TravelingTaskConfig> & {
   distanceMatrix: number[][];
 }
 
@@ -68,7 +68,8 @@ export class TravelingMutationStrategy implements MutationStrategyInterface<Trav
 }
 
 export class TravelingCrossoverStrategy implements CrossoverStrategyInterface<TravelingGenome> {
-  cross(lhs: TravelingGenome, rhs: TravelingGenome, newGenomeId: number): TravelingGenome {
+  cross(parents: TravelingGenome[], newGenomeId: number): TravelingGenome {
+    const [lhs, rhs] = parents;
     const length = lhs.path.length;
 
     const start = Math.floor(Math.random() * length);
@@ -97,9 +98,9 @@ export class TravelingCrossoverStrategy implements CrossoverStrategyInterface<Tr
   }
 }
 
-export class TravelingMultiprocessingMetricsStrategy extends BaseMultiprocessingMetricsStrategy<
+export class TravelingMultiprocessingPhenotypeStrategy extends BaseMultiprocessingPhenotypeStrategy<
   TravelingGenome,
-  TravelingMultiprocessingMetricsStrategyConfig,
+  TravelingMultiprocessingPhenotypeStrategyConfig,
   TravelingTaskConfig
 > {
   protected createTaskInput(genome: TravelingGenome): TravelingTaskConfig {
@@ -108,7 +109,7 @@ export class TravelingMultiprocessingMetricsStrategy extends BaseMultiprocessing
 }
 
 export class TravelingFitnessStrategy implements FitnessStrategyInterface {
-  score(results: GenerationMetricsMatrix): GenerationFitnessColumn {
+  score(results: GenerationPhenotypeMatrix): GenerationFitnessColumn {
     return results.map((result) => result[0]);
   }
 }

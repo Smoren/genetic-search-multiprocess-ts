@@ -1,37 +1,37 @@
 import { Pool } from 'multiprocessor';
 import {
   BaseGenome,
-  BaseMetricsStrategy,
-  GenerationMetricsMatrix,
-  GenomeMetricsRow,
+  BasePhenotypeStrategy,
+  GenerationPhenotypeMatrix,
+  GenomePhenotypeRow,
 } from "genetic-search";
-import { MultiprocessingMetricsStrategyConfig } from "./types";
+import { MultiprocessingPhenotypeStrategyConfig } from "./types";
 
 /**
- * Base class for metrics strategies that uses multiprocessing to execute metrics calculation tasks.
+ * Base class for phenotype strategies that uses multiprocessing to execute phenotype calculation tasks.
  *
  * @template TGenome - The type of the genome.
- * @template TConfig - The type of the configuration for the metrics strategy.
- * @template TTaskConfig - The type of the configuration for each metrics calculation task.
+ * @template TConfig - The type of the configuration for the phenotype strategy.
+ * @template TTaskConfig - The type of the configuration for each phenotype calculation task.
  */
-export abstract class BaseMultiprocessingMetricsStrategy<
+export abstract class BaseMultiprocessingPhenotypeStrategy<
   TGenome extends BaseGenome,
-  TConfig extends MultiprocessingMetricsStrategyConfig<TTaskConfig>,
+  TConfig extends MultiprocessingPhenotypeStrategyConfig<TTaskConfig>,
   TTaskConfig,
-> extends BaseMetricsStrategy<TGenome, TConfig, TTaskConfig> {
+> extends BasePhenotypeStrategy<TGenome, TConfig, TTaskConfig> {
   /**
-   * Execute the metrics calculation tasks.
+   * Execute the phenotype calculation tasks.
    *
-   * @param inputs The inputs to the metrics calculation tasks.
-   * @returns A matrix of metrics results, where each row corresponds to a single genome.
+   * @param inputs The inputs to the phenotype calculation tasks.
+   * @returns A matrix of phenotype results, where each row corresponds to a single genome.
    */
-  protected async execTasks(inputs: TTaskConfig[]): Promise<GenerationMetricsMatrix> {
+  protected async execTasks(inputs: TTaskConfig[]): Promise<GenerationPhenotypeMatrix> {
     const pool = new Pool(this.config.poolSize);
     const result = await pool.map(
       inputs,
       this.config.task,
-      (result, input) => this.config.onTaskResult?.(result as GenomeMetricsRow, input),
-    ) as GenerationMetricsMatrix;
+      (result, input) => this.config.onTaskResult?.(result as GenomePhenotypeRow, input),
+    ) as GenerationPhenotypeMatrix;
     pool.close();
 
     return result;

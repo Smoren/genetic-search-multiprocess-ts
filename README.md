@@ -13,7 +13,7 @@ Description
 -----------
 
 This is an extension for [Genetic Search](https://github.com/Smoren/genetic-search-ts) library that implements
-multiprocessing metrics calculation.
+multiprocessing phenotype calculation.
 
 Setup
 -----

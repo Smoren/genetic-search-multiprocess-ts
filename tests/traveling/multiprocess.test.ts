@@ -1,14 +1,15 @@
 import { describe, expect, it } from "@jest/globals";
 import {
-  AverageMetricsCache,
+  AveragePhenotypeCache,
   ComposedGeneticSearch,
   ComposedGeneticSearchConfig,
   GeneticSearch,
   GeneticSearchConfig,
   GeneticSearchStrategyConfig,
-  DummyMetricsCache,
-  SimpleMetricsCache,
+  DummyPhenotypeCache,
+  SimplePhenotypeCache,
   DescendingSortingStrategy,
+  RandomSelectionStrategy,
 } from "genetic-search";
 import {
   calcPathDistance,
@@ -16,7 +17,7 @@ import {
   TravelingCrossoverStrategy,
   TravelingFitnessStrategy,
   TravelingGenome,
-  TravelingMultiprocessingMetricsStrategy,
+  TravelingMultiprocessingPhenotypeStrategy,
   TravelingMutationStrategy,
   TravelingPopulateStrategy,
   // @ts-ignore
@@ -38,7 +39,7 @@ describe.each([
 
       const strategies: GeneticSearchStrategyConfig<TravelingGenome> = {
         populate: new TravelingPopulateStrategy(distanceMatrix.length),
-        metrics: new TravelingMultiprocessingMetricsStrategy({
+        phenotype: new TravelingMultiprocessingPhenotypeStrategy({
           poolSize: 4,
           distanceMatrix,
           task: (data) => {
@@ -56,9 +57,10 @@ describe.each([
         }),
         fitness: new TravelingFitnessStrategy(),
         sorting: new DescendingSortingStrategy(),
+        selection: new RandomSelectionStrategy(2),
         mutation: new TravelingMutationStrategy(),
         crossover: new TravelingCrossoverStrategy(),
-        cache: new DummyMetricsCache(),
+        cache: new DummyPhenotypeCache(),
       }
 
       const search = new GeneticSearch<TravelingGenome>(config, strategies);
@@ -89,7 +91,7 @@ describe.each([
 
       const strategies: GeneticSearchStrategyConfig<TravelingGenome> = {
         populate: new TravelingPopulateStrategy(distanceMatrix.length),
-        metrics: new TravelingMultiprocessingMetricsStrategy({
+        phenotype: new TravelingMultiprocessingPhenotypeStrategy({
           poolSize: 4,
           distanceMatrix,
           task: (data) => {
@@ -108,8 +110,9 @@ describe.each([
         fitness: new TravelingFitnessStrategy(),
         sorting: new DescendingSortingStrategy(),
         mutation: new TravelingMutationStrategy(),
+        selection: new RandomSelectionStrategy(2),
         crossover: new TravelingCrossoverStrategy(),
-        cache: new SimpleMetricsCache(),
+        cache: new SimplePhenotypeCache(),
       }
 
       const search = new GeneticSearch<TravelingGenome>(config, strategies);
@@ -147,7 +150,7 @@ describe.each([
 
       const strategies: GeneticSearchStrategyConfig<TravelingGenome> = {
         populate: new TravelingPopulateStrategy(distanceMatrix.length),
-        metrics: new TravelingMultiprocessingMetricsStrategy({
+        phenotype: new TravelingMultiprocessingPhenotypeStrategy({
           poolSize: 4,
           distanceMatrix,
           task: (data) => {
@@ -165,9 +168,10 @@ describe.each([
         }),
         fitness: new TravelingFitnessStrategy(),
         sorting: new DescendingSortingStrategy(),
+        selection: new RandomSelectionStrategy(2),
         mutation: new TravelingMutationStrategy(),
         crossover: new TravelingCrossoverStrategy(),
-        cache: new DummyMetricsCache(),
+        cache: new DummyPhenotypeCache(),
       }
 
       const search = new ComposedGeneticSearch<TravelingGenome>(config, strategies);
@@ -205,7 +209,7 @@ describe.each([
 
       const strategies: GeneticSearchStrategyConfig<TravelingGenome> = {
         populate: new TravelingPopulateStrategy(distanceMatrix.length),
-        metrics: new TravelingMultiprocessingMetricsStrategy({
+        phenotype: new TravelingMultiprocessingPhenotypeStrategy({
           poolSize: 4,
           distanceMatrix,
           task: (data) => {
@@ -224,8 +228,9 @@ describe.each([
         fitness: new TravelingFitnessStrategy(),
         sorting: new DescendingSortingStrategy(),
         mutation: new TravelingMutationStrategy(),
+        selection: new RandomSelectionStrategy(2),
         crossover: new TravelingCrossoverStrategy(),
-        cache: new AverageMetricsCache(),
+        cache: new AveragePhenotypeCache(),
       }
 
       const search = new ComposedGeneticSearch<TravelingGenome>(config, strategies);

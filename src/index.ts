@@ -1,15 +1,15 @@
 import type {
-  MultiprocessingMetricsStrategyConfig,
+  MultiprocessingPhenotypeStrategyConfig,
 } from './types';
 
 import {
-  BaseMultiprocessingMetricsStrategy,
+  BaseMultiprocessingPhenotypeStrategy,
 } from './strategies';
 
 export type {
-  MultiprocessingMetricsStrategyConfig,
+  MultiprocessingPhenotypeStrategyConfig,
 };
 
 export {
-  BaseMultiprocessingMetricsStrategy,
+  BaseMultiprocessingPhenotypeStrategy,
 };
