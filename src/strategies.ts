@@ -13,6 +13,8 @@ import { MultiprocessingPhenotypeStrategyConfig } from "./types";
  * @template TGenome - The type of the genome.
  * @template TConfig - The type of the configuration for the phenotype strategy.
  * @template TTaskConfig - The type of the configuration for each phenotype calculation task.
+ *
+ * @category Strategies
  */
 export abstract class BaseMultiprocessingPhenotypeStrategy<
   TGenome extends BaseGenome,
