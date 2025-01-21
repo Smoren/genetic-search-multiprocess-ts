@@ -32,7 +32,7 @@ export abstract class BaseMultiprocessingPhenotypeStrategy<
     const result = await pool.map(
       inputs,
       this.config.task,
-      (result, input) => this.config.onTaskResult?.(result as GenomePhenotypeRow, input),
+      { onTaskSuccess: (result, input) => this.config.onTaskResult?.(result as GenomePhenotypeRow, input) },
     ) as GenerationPhenotypeMatrix;
     pool.close();
 
