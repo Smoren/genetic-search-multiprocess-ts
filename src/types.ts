@@ -1,14 +1,14 @@
-import type { PhenotypeStrategyConfig } from "genetic-search";
+import type { PhenomeStrategyConfig } from "genetic-search";
 
 /**
- * Configuration for the Multiprocessing Phenotype Strategy.
+ * Configuration for the Multiprocessing Phenome Strategy.
  *
- * @template TTaskConfig The type of phenotype task calculation configuration.
+ * @template TTaskConfig The type of phenome task calculation configuration.
  *
  * @property {number} poolSize The size of the multiprocessing pool.
  *
  * @category Strategies Config
  */
-export type MultiprocessingPhenotypeStrategyConfig<TTaskConfig> = PhenotypeStrategyConfig<TTaskConfig> & {
+export type MultiprocessingPhenomeStrategyConfig<TTaskConfig> = PhenomeStrategyConfig<TTaskConfig> & {
   poolSize: number;
 };

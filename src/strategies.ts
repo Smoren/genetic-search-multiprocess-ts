@@ -1,39 +1,39 @@
 import { Pool } from 'multiprocessor';
 import {
   BaseGenome,
-  BasePhenotypeStrategy,
-  GenerationPhenotypeMatrix,
-  GenomePhenotypeRow,
+  BasePhenomeStrategy,
+  GenerationPhenomeMatrix,
+  PhenomeRow,
 } from "genetic-search";
-import { MultiprocessingPhenotypeStrategyConfig } from "./types";
+import { MultiprocessingPhenomeStrategyConfig } from "./types";
 
 /**
- * Base class for phenotype strategies that uses multiprocessing to execute phenotype calculation tasks.
+ * Base class for phenome strategies that uses multiprocessing to execute phenome calculation tasks.
  *
  * @template TGenome - The type of the genome.
- * @template TConfig - The type of the configuration for the phenotype strategy.
- * @template TTaskConfig - The type of the configuration for each phenotype calculation task.
+ * @template TConfig - The type of the configuration for the phenome strategy.
+ * @template TTaskConfig - The type of the configuration for each phenome calculation task.
  *
  * @category Strategies
  */
-export abstract class BaseMultiprocessingPhenotypeStrategy<
+export abstract class BaseMultiprocessingPhenomeStrategy<
   TGenome extends BaseGenome,
-  TConfig extends MultiprocessingPhenotypeStrategyConfig<TTaskConfig>,
+  TConfig extends MultiprocessingPhenomeStrategyConfig<TTaskConfig>,
   TTaskConfig,
-> extends BasePhenotypeStrategy<TGenome, TConfig, TTaskConfig> {
+> extends BasePhenomeStrategy<TGenome, TConfig, TTaskConfig> {
   /**
-   * Execute the phenotype calculation tasks.
+   * Execute the phenome calculation tasks.
    *
-   * @param inputs The inputs to the phenotype calculation tasks.
-   * @returns A matrix of phenotype results, where each row corresponds to a single genome.
+   * @param inputs The inputs to the phenome calculation tasks.
+   * @returns A matrix of phenome results, where each row corresponds to a single genome.
    */
-  protected async execTasks(inputs: TTaskConfig[]): Promise<GenerationPhenotypeMatrix> {
+  protected async execTasks(inputs: TTaskConfig[]): Promise<GenerationPhenomeMatrix> {
     const pool = new Pool(this.config.poolSize);
     const result = await pool.map(
       inputs,
       this.config.task,
-      { onTaskSuccess: (result, input) => this.config.onTaskResult?.(result as GenomePhenotypeRow, input) },
-    ) as GenerationPhenotypeMatrix;
+      { onTaskSuccess: (result, input) => this.config.onTaskResult?.(result as PhenomeRow, input) },
+    ) as GenerationPhenomeMatrix;
     pool.close();
 
     return result;

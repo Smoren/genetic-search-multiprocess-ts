@@ -1,6 +1,6 @@
 import {
   BaseGenome,
-  GenerationPhenotypeMatrix,
+  GenerationPhenomeMatrix,
   CrossoverStrategyInterface,
   GenerationFitnessColumn,
   PopulateStrategyInterface,
@@ -9,8 +9,8 @@ import {
   BaseMutationStrategyConfig,
   IdGeneratorInterface,
 } from "genetic-search";
-import type { MultiprocessingPhenotypeStrategyConfig } from "../../src";
-import { BaseMultiprocessingPhenotypeStrategy } from "../../src";
+import type { MultiprocessingPhenomeStrategyConfig } from "../../src";
+import { BaseMultiprocessingPhenomeStrategy } from "../../src";
 
 export type ParabolaArgumentGenome = BaseGenome & {
   id: number;
@@ -50,14 +50,14 @@ export class ParabolaCrossoverStrategy implements CrossoverStrategyInterface<Par
   }
 }
 
-export class ParabolaMultiprocessingPhenotypeStrategy extends BaseMultiprocessingPhenotypeStrategy<ParabolaArgumentGenome, MultiprocessingPhenotypeStrategyConfig<ParabolaTaskConfig>, ParabolaTaskConfig> {
+export class ParabolaMultiprocessingPhenomeStrategy extends BaseMultiprocessingPhenomeStrategy<ParabolaArgumentGenome, MultiprocessingPhenomeStrategyConfig<ParabolaTaskConfig>, ParabolaTaskConfig> {
   protected createTaskInput(genome: ParabolaArgumentGenome): ParabolaTaskConfig {
     return [genome.x];
   }
 }
 
 export class ParabolaMaxValueFitnessStrategy implements FitnessStrategyInterface {
-  score(results: GenerationPhenotypeMatrix): GenerationFitnessColumn {
+  score(results: GenerationPhenomeMatrix): GenerationFitnessColumn {
     return results.map((result) => result[0]);
   }
 }

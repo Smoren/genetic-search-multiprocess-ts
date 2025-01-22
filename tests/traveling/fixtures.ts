@@ -3,14 +3,14 @@ import {
   CrossoverStrategyInterface,
   FitnessStrategyInterface,
   GenerationFitnessColumn,
-  GenerationPhenotypeMatrix,
+  GenerationPhenomeMatrix,
   MutationStrategyInterface,
   PopulateStrategyInterface,
   Population,
   IdGeneratorInterface,
 } from "genetic-search";
-import type { MultiprocessingPhenotypeStrategyConfig } from "../../src";
-import { BaseMultiprocessingPhenotypeStrategy } from "../../src";
+import type { MultiprocessingPhenomeStrategyConfig } from "../../src";
+import { BaseMultiprocessingPhenomeStrategy } from "../../src";
 
 export type TravelingGenome = BaseGenome & {
   id: number;
@@ -19,7 +19,7 @@ export type TravelingGenome = BaseGenome & {
 
 export type TravelingTaskConfig = [number[], number[][]];
 
-export type TravelingMultiprocessingPhenotypeStrategyConfig = MultiprocessingPhenotypeStrategyConfig<TravelingTaskConfig> & {
+export type TravelingMultiprocessingPhenomeStrategyConfig = MultiprocessingPhenomeStrategyConfig<TravelingTaskConfig> & {
   distanceMatrix: number[][];
 }
 
@@ -98,9 +98,9 @@ export class TravelingCrossoverStrategy implements CrossoverStrategyInterface<Tr
   }
 }
 
-export class TravelingMultiprocessingPhenotypeStrategy extends BaseMultiprocessingPhenotypeStrategy<
+export class TravelingMultiprocessingPhenomeStrategy extends BaseMultiprocessingPhenomeStrategy<
   TravelingGenome,
-  TravelingMultiprocessingPhenotypeStrategyConfig,
+  TravelingMultiprocessingPhenomeStrategyConfig,
   TravelingTaskConfig
 > {
   protected createTaskInput(genome: TravelingGenome): TravelingTaskConfig {
@@ -109,7 +109,7 @@ export class TravelingMultiprocessingPhenotypeStrategy extends BaseMultiprocessi
 }
 
 export class TravelingFitnessStrategy implements FitnessStrategyInterface {
-  score(results: GenerationPhenotypeMatrix): GenerationFitnessColumn {
+  score(results: GenerationPhenomeMatrix): GenerationFitnessColumn {
     return results.map((result) => result[0]);
   }
 }
