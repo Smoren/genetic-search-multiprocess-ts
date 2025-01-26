@@ -10,6 +10,7 @@ import {
   SimplePhenomeCache,
   DescendingSortingStrategy,
   RandomSelectionStrategy,
+  TournamentSelectionStrategy,
 } from "genetic-search";
 import {
   calcPathDistance,
@@ -57,7 +58,7 @@ describe.each([
         }),
         fitness: new TravelingFitnessStrategy(),
         sorting: new DescendingSortingStrategy(),
-        selection: new RandomSelectionStrategy(2),
+        selection: new TournamentSelectionStrategy<TravelingGenome>(2, 5),
         mutation: new TravelingMutationStrategy(),
         crossover: new TravelingCrossoverStrategy(),
         cache: new DummyPhenomeCache(),
@@ -110,7 +111,7 @@ describe.each([
         fitness: new TravelingFitnessStrategy(),
         sorting: new DescendingSortingStrategy(),
         mutation: new TravelingMutationStrategy(),
-        selection: new RandomSelectionStrategy(2),
+        selection: new RandomSelectionStrategy<TravelingGenome>(2),
         crossover: new TravelingCrossoverStrategy(),
         cache: new SimplePhenomeCache(),
       }
@@ -168,7 +169,7 @@ describe.each([
         }),
         fitness: new TravelingFitnessStrategy(),
         sorting: new DescendingSortingStrategy(),
-        selection: new RandomSelectionStrategy(2),
+        selection: new TournamentSelectionStrategy<TravelingGenome>(2, 5),
         mutation: new TravelingMutationStrategy(),
         crossover: new TravelingCrossoverStrategy(),
         cache: new DummyPhenomeCache(),
@@ -228,7 +229,7 @@ describe.each([
         fitness: new TravelingFitnessStrategy(),
         sorting: new DescendingSortingStrategy(),
         mutation: new TravelingMutationStrategy(),
-        selection: new RandomSelectionStrategy(2),
+        selection: new RandomSelectionStrategy<TravelingGenome>(2),
         crossover: new TravelingCrossoverStrategy(),
         cache: new AveragePhenomeCache(),
       }
