@@ -10,6 +10,8 @@ import {
   SimplePhenomeCache,
   DescendingSortingStrategy,
   RandomSelectionStrategy,
+  TournamentSelectionStrategy,
+  TruncationSelectionStrategy,
 } from "genetic-search";
 import {
   ParabolaArgumentGenome,
@@ -23,7 +25,7 @@ import {
 } from "./fixtures";
 
 describe('Parabola Multiprocessing', () => {
-  it('Get Parabola Max Multiprocessing Test', () => {
+  it('Get Parabola Max Test', () => {
     const [a, b] = [12, -3];
     const [x, y] = [-12, -3];
 
@@ -42,7 +44,7 @@ describe('Parabola Multiprocessing', () => {
       }),
       fitness: new ParabolaMaxValueFitnessStrategy(),
       sorting: new DescendingSortingStrategy(),
-      selection: new RandomSelectionStrategy<ParabolaArgumentGenome>(2),
+      selection: new TournamentSelectionStrategy<ParabolaArgumentGenome>(2, 5),
       mutation: new ParabolaMutationStrategy(),
       crossover: new ParabolaCrossoverStrategy(),
       cache: new DummyPhenomeCache(),
@@ -68,7 +70,7 @@ describe('Parabola Multiprocessing', () => {
     });
   }, 50000);
 
-  it('Get Parabola Max Cached Multiprocessing Test', () => {
+  it('Get Parabola Max Cached Test', () => {
     const [a, b] = [12, -3];
     const [x, y] = [-12, -3];
 
@@ -86,7 +88,7 @@ describe('Parabola Multiprocessing', () => {
       }),
       fitness: new ParabolaMaxValueFitnessStrategy(),
       sorting: new DescendingSortingStrategy(),
-      selection: new RandomSelectionStrategy<ParabolaArgumentGenome>(2),
+      selection: new TruncationSelectionStrategy<ParabolaArgumentGenome>(2, config.populationSize),
       mutation: new ParabolaMutationStrategy(),
       crossover: new ParabolaCrossoverStrategy(),
       cache: new SimplePhenomeCache(),
@@ -111,7 +113,7 @@ describe('Parabola Multiprocessing', () => {
     });
   }, 50000);
 
-  it('Get Parabola Max Composed Multiprocessing Test', () => {
+  it('Get Parabola Max Composed Test', () => {
     const [a, b] = [12, -3];
     const [x, y] = [-12, -3];
 
@@ -136,7 +138,7 @@ describe('Parabola Multiprocessing', () => {
       }),
       fitness: new ParabolaMaxValueFitnessStrategy(),
       sorting: new DescendingSortingStrategy(),
-      selection: new RandomSelectionStrategy<ParabolaArgumentGenome>(2),
+      selection: new TruncationSelectionStrategy<ParabolaArgumentGenome>(2, config.final.survivalRate),
       mutation: new ParabolaMutationStrategy(),
       crossover: new ParabolaCrossoverStrategy(),
       cache: new DummyPhenomeCache(),
@@ -161,7 +163,7 @@ describe('Parabola Multiprocessing', () => {
     });
   }, 50000);
 
-  it('Get Parabola Max Composed Cached Multiprocessing Test', () => {
+  it('Get Parabola Max Composed Cached Test', () => {
     const [a, b] = [12, -3];
     const [x, y] = [-12, -3];
 

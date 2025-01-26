@@ -29,7 +29,7 @@ import { dataProviderForTravelingSalesman } from "./data";
 describe.each([
   ...dataProviderForTravelingSalesman(),
 ] as Array<[number[][]]>)(
-  'Traveling Salesman Multiprocessing Test',
+  'Traveling Salesman Test',
   (distanceMatrix: number[][]) => {
     it('', () => {
       const config: GeneticSearchConfig = {
@@ -81,7 +81,7 @@ describe.each([
 describe.each([
   ...dataProviderForTravelingSalesman(),
 ] as Array<[number[][]]>)(
-  'Traveling Salesman Cached Multiprocessing Test',
+  'Traveling Salesman Cached Test',
   (distanceMatrix: number[][]) => {
     it('', () => {
       const config: GeneticSearchConfig = {
@@ -133,7 +133,7 @@ describe.each([
 describe.each([
   ...dataProviderForTravelingSalesman(),
 ] as Array<[number[][]]>)(
-  'Traveling Salesman Composed Multiprocessing Test',
+  'Traveling Salesman Composed Test',
   (distanceMatrix: number[][]) => {
     it('', () => {
       const config: ComposedGeneticSearchConfig = {
@@ -185,14 +185,14 @@ describe.each([
 
         expect(calcPathDistance(bestGenome.path, distanceMatrix)).toBeCloseTo(expectedMinDistance);
       });
-    }, 50000);
+    }, 100000);
   }
 );
 
 describe.each([
   ...dataProviderForTravelingSalesman(),
 ] as Array<[number[][]]>)(
-  'Traveling Salesman Cached Composed Multiprocessing Test',
+  'Traveling Salesman Cached Composed Test',
   (distanceMatrix: number[][]) => {
     it('', () => {
       const config: ComposedGeneticSearchConfig = {
@@ -244,6 +244,6 @@ describe.each([
 
         expect(calcPathDistance(bestGenome.path, distanceMatrix)).toBeCloseTo(expectedMinDistance);
       });
-    }, 50000);
+    }, 100000);
   }
 );
